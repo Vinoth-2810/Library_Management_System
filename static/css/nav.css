@@ -1,0 +1,9 @@
+.headnaveritem :hover {
+  color: rgb(255, 0, 0);
+  background-color: #0040ff;
+}
+.navhr {
+  border: none;
+  height: 1px;
+  background-image: linear-gradient (to right, rgba(0, 0, 0, 0), cornflowerblue, rgba(0, 0, 0, 0));
+}

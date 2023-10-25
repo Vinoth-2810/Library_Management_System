@@ -1,0 +1,156 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white headnaver">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Navbar brand -->
+      <a class="navbar-brand mt-2 mt-lg-0" href="#">
+        <img src="/static/image/logo.png" height="50" alt="Logo" loading="lazy" />
+      </a>
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item fs-5 me-2 headnaveritem">
+          <a class="nav-link" id="log" href="{{url_for('dashbrd')}}" onmouseover="this.style.color='#FF0'" onmouseout="this.style.color='#000'"
+            >Dashboard</a
+          >
+        </li>
+        <li class="nav-item fs-5 me-2 headnaveritem" id="aut3">
+          <a class="nav-link" href="{{url_for('books')}}" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#000'"
+            >Library Books</a
+          >
+        </li>
+        <li class="nav-item fs-5 me-2 headnaveritem" id="aut5">
+          <a class="nav-link" href="{{url_for('audiobooks')}}" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#000'"
+            >Audio Books</a
+          >
+        </li>
+        <li class="nav-item fs-5 me-2 headnaveritem" id="aut1">
+          <a class="nav-link" href="{{url_for('issue')}}" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#000'"
+            >Issue Books</a
+          >
+        </li>
+        <li class="nav-item fs-5 me-2 headnaveritem" id="aut2">
+          <a class="nav-link" href="{{url_for('rtrn')}}" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#000'"
+            >Return Books</a
+          >
+        </li>
+        <li class="nav-item fs-5 me-2 headnaveritem" id="aut4">
+          <a class="nav-link" href="{{url_for('modify')}}" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#000'"
+            >Modify Books</a
+          >
+        </li>
+      </ul>
+      <!-- Left links -->
+      <div class="d-flex align-items-center" id="topright_links">
+        <div class="dropdown px-3 me-2 dropstart">
+          <a class="btn btn-white" href="#" role="button" id="profile" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 50%">
+            <!-- removed dropdown-toggle -->
+            <i class="fa-solid fa-user" style="color: #000000"></i>
+          </a>
+
+          <ul class="dropdown-menu" aria-labelledby="profile" style="width: 15rem">
+            <div style="width: 10rem; margin: 1rem 2.5rem">
+              <img
+                src="https://images.macrumors.com/t/XjzsIpBxeGphVqiWDqCzjDgY4Ck=/800x0/article-new/2019/04/guest-user-250x250.jpg?lossy"
+                class="img-fluid rounded-circle"
+                alt="Picture"
+              />
+            </div>
+            <div>
+              <p class="dropdown-item h2 text-center text-primary"><b>Vinoth C</b></p>
+              <p class="h6 text-center text-secondary"><i>Student</i></p>
+              <div style="background-color: #ffffff">
+                <li class="dropdown-item text-dark">
+                  <span class="badge bg-light text-primary">Roll No </span> - <span class="badge bg-info text-dark">71102589634p</span>
+                </li>
+                <li class="dropdown-item">
+                  <span class="badge bg-light text-primary">Total Books Issued </span> - <span class="badge bg-warning text-dark">10</span>
+                </li>
+                <li class="dropdown-item">
+                  <span class="badge bg-light text-primary">Total Books Returned </span> - <span class="badge bg-success">10</span>
+                </li>
+                <li class="dropdown-item">
+                  <span class="badge bg-light text-primary">Total Books Not Returned </span> - <span class="badge bg-danger text-light">10</span>
+                </li>
+                <li class="dropdown-item">
+                  <span class="badge bg-light text-primary">Total Fines </span> - <span class="badge bg-danger text-light">2.00</span>
+                </li>
+              </div>
+            </div>
+          </ul>
+        </div>
+        <!-- <a class="btn btn-white px-3 me-2" role="button"><i class="fa-solid fa-user" style="color: #000000"></i></a> -->
+        <a href="{{url_for('dashbrd')}}" class="btn btn-danger me-3 px-3" role="button">
+          Get Out <i class="fa-solid fa-person-walking-dashed-line-arrow-right" style="color: #ffffff"></i
+        ></a>
+      </div>
+    </div>
+
+    <script>
+      const auth1 = document.getElementById("aut1");
+      const auth2 = document.getElementById("aut2");
+      const auth3 = document.getElementById("aut3");
+      const auth4 = document.getElementById("aut4");
+      const auth5 = document.getElementById("aut5");
+      const log1 = document.getElementById("log");
+      const tr_link = document.getElementById("topright_links");
+      if (localStorage.getItem("Auth") == "Success" && localStorage.getItem("Role") == "admin") {
+        auth1.style.display = "block";
+        auth2.style.display = "block";
+        auth3.style.display = "block";
+        auth4.style.display = "block";
+        auth5.style.display = "block";
+        tr_link.classList.remove("d-none");
+        log1.classList.add("disabled");
+      } else if (localStorage.getItem("Auth") == "Fail" && localStorage.getItem("Role") == "admin") {
+        auth1.style.display = "none";
+        auth2.style.display = "none";
+        auth3.style.display = "none";
+        auth4.style.display = "none";
+        auth5.style.display = "none";
+        tr_link.classList.add("d-none");
+        log1.classList.remove("disabled");
+      } else if (localStorage.getItem("Auth") == "Fail" && localStorage.getItem("Role") == "student") {
+        auth1.style.display = "none";
+        auth2.style.display = "none";
+        auth3.style.display = "none";
+        auth4.style.display = "none";
+        auth5.style.display = "none";
+        tr_link.classList.add("d-none");
+        log1.classList.remove("disabled");
+      } else if (localStorage.getItem("Auth") == "Success" && localStorage.getItem("Role") == "student") {
+        auth1.style.display = "none";
+        auth2.style.display = "none";
+        auth4.style.display = "none";
+        auth3.style.display = "block";
+        auth5.style.display = "block";
+        tr_link.classList.remove("d-none");
+        log1.classList.add("disabled");
+      } else {
+        auth1.style.display = "none";
+        auth2.style.display = "none";
+        auth3.style.display = "none";
+        auth4.style.display = "none";
+        auth5.style.display = "none";
+        tr_link.classList.add("d-none");
+        log1.classList.remove("disabled");
+      }
+    </script>
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->

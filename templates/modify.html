@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include 'head.html' %}
+    <title>Modify Books</title>
+  </head>
+  <body>
+    {% include "headernav.html" %}
+    <hr class="navhr" />
+
+    <div class="row" style="margin: 2% 25%">
+      <!-- <a href="{{url_for('rtrn')}}"> -->
+      <div class="col">
+        <div class="card h-100 p-1">
+          <img src="{{ url_for('static', filename='image/add.jpg') }}" class="card-img-top text-center" alt="Add Icon" />
+          <div class="card-body">
+            <h5 class="card-title text-center">Add new books</h5>
+            <div class="card-text text-center">
+              <p>Adding new books to library</p>
+              <a href="{{ url_for('addbooks')}}">
+                <button class="btn btn-primary text-center"><i class="fa-solid fa-plus fa-beat text-light"> &nbsp;</i> Add Books</button></a
+              >
+            </div>
+          </div>
+          <div class="card-footer">
+            <small class="text-danger fw-bold">Last updated : <span class="text-success">{{lastseen['LastAddon']}}</span></small>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card h-100 p-1">
+          <img src="{{ url_for('static', filename='image/edit.jpg') }}" class="card-img-top text-center" alt="Edit Icon" />
+          <div class="card-body">
+            <h5 class="card-title text-center">Edit books</h5>
+            <div class="card-text text-center">
+              <p>Editing existing books information from library</p>
+              <a href="{{ url_for('editbooks')}}">
+                <button class="btn btn-primary text-center"><i class="fa-solid fa-pencil fa-beat text-light"> &nbsp;</i> Edit Books</button></a
+              >
+            </div>
+          </div>
+          <div class="card-footer">
+            <small class="text-danger fw-bold">Last updated : <span class="text-success">{{lastseen['LastModify']}}</span></small>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card h-100 p-1">
+          <img src="{{ url_for('static', filename='image/delete.jpg') }}" class="card-img-top text-center" alt="Delete Icon" />
+          <div class="card-body">
+            <h5 class="card-title text-center">Remove books</h5>
+            <div class="card-text text-center">
+              <p>Removing existing books from library</p>
+              <a href="{{ url_for('removebooks')}}"
+                ><button class="btn btn-primary text-center"><i class="fa-solid fa-xmark fa-beat text-light"> &nbsp;</i> Remove Books</button></a
+              >
+            </div>
+          </div>
+          <div class="card-footer">
+            <small class="text-danger fw-bold">Last updated : <span class="text-success">{{lastseen['LastDrop']}}</span></small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container row">
+      <div class="col-12">
+        <h3 class="h3 text-info card-text text-center">Guideliness</h3>
+        <div class="d-flex justify-content-center">
+          <ul class="list-inline m-0 p-0">
+            <li class="list-inline-item border-0">1. Provide accurate and complete information about that book.</li>
+            <li class="list-inline-item border-0">2. Provide Correct category and ID for that book.</li>
+            <li class="list-inline-item border-0">3. Ensure information before submitting response.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='image/logo.png') }}">
+    <title>Authentication Error</title>
+    <!-- Include Bootstrap CSS (you may need to adjust the path to the CSS file) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-danger text-white">
+                        <h1 class="text-center">Authentication Error</h1>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-center">Sorry, there was an error with your authentication.</p>
+                        <p class="text-center">Please check your credentials and try again.</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="{{url_for('dashbrd')}}" class="btn btn-primary">Go back to Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS (optional, for additional functionality) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

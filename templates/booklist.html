@@ -1,0 +1,79 @@
+
+    <div class="container py-2">
+      
+        <!-- one -->
+      <div class="row justify-content-center mb-3">
+        <div class="col-md-12 col-xl-10">
+          <p class="btn btn-success disabled"><i class="fa-solid fa-angles-right" style="color: #ffffff;"></i> {{Cate}}</p>
+          <div class="card shadow-0 border rounded-3">
+            <div class="card-body">
+              {% for item in book%}
+              <div class="row">
+                <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                  <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                    <img src='{{item["_ImgSrc"]}}'
+                      class="w-75" />
+                    <a href="#!">
+                      <div class="hover-overlay">
+                        <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-8 col-lg-8 col-xl-8"> 
+                  <!-- changed 6 to 8 -->
+                  <h5>{{item["_BookTitle"]}} <span class="badge  bg-primary" style="font-size: small;"> {{item["_Edition"]}}
+                    {% if item["_Edition"]=="1" %}
+                    <sup>st</sup> Edition</span>
+                    {% elif item["_Edition"]=="2" %}
+                    <sup>rd</sup> Edition</span>                   
+                    {% else %}
+                    <sup>th</sup> Edition</span>                  
+                   {% endif %}
+                  </h5>
+                  <p>{{item["_BookAuthor"]}}</p>
+                  <p class="text-truncate mb-4 mb-md-0">
+                  {{item["_Description"]}} 
+                  </p>
+                  <div class="mt-1 mb-0 text-muted ">
+                    <span class="text-primary"> ISBN  :</span>
+                    <span>{{item["_ISBN"]}}</span><br>
+    
+                    <span class="text-primary">Publications  :</span>
+                    <span>{{item["_Publications"]}}<br /></span>
+
+                    <span class="text-primary">Publications Date :</span>
+                    <span>{{item["_Year"]}}<br /></span>
+
+                    <span class="text-primary"> Location  :</span>
+                    <span>{{item["_Location"]}}</span><br>
+                    <div class="d-flex justify-content-between">
+                        <div>
+                           <span class="text-primary"> Total Availability  :  </span><span class="badge rounded-pill bg-success"> {{item["_TotalAvail"]}} </span><br>
+                           <span class="text-primary"> Current Availability  :  </span><span class="badge rounded-pill bg-success"> {{item["_PresentAvail"]}}</span><br>
+                        </div>
+                        <div>
+                          {% if item["_Audio"]=="Yes" %}
+                          <a href="{{ url_for('audiobook',id=item['_BookId']) }}" ><button type="button" class="btn btn-primary"><i class="fa-solid fa-play fa-beat" style="color: #000000;"></i> &nbsp; Audio Books</button></a>
+                          {% else %}
+                          <button type="button" class="btn btn-warning"><i class="fa-solid fa-volume-xmark fa-beat" style="color: #000000;"></i> &nbsp; No Audio Books</button>
+                          {% endif %}
+                        </div>
+                    </div>
+                   
+                  </div>
+                
+
+                </div> 
+              </div><hr style="width:100%;margin-top: 1%;"> 
+                {% endfor %}
+              
+              <!-- inside one -->
+            </div>
+          </div>
+        </div>
+       
+      </div>
+     
+      <!-- finished one -->
+</div>

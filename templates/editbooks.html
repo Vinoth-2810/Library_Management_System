@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+   {% include 'head.html' %}
+    <title>Edit Books</title>
+
+  </head>
+  <body>
+    {% include 'headernav.html' %}
+    <hr class="navhr" />
+    <h2 class="text-center h2 text-primary mt-3">Edit Library Book</h2>
+    <p class="h4 text-center text-white bg-success p-1  " style="width:60%;margin:2% 20% 0% 20%;">Give Book Information</p>
+    <form action="{{url_for('editdone')}}" method="post" style="margin: 2% 10%" onchange="getdata()">
+        <div class="row d-flex align-items-center m-3">
+            
+        <div class="col-2 mb-5">
+          <div class="form-outline">
+            <label class="form-label" for="Bookid">Book ID</label>
+            <input type="text" id="Bookid" name="BookId" class="form-control  " placeholder="Ex: CS01AS4P" />
+          </div>
+        </div>
+        <div class="col-10">
+            <div class="container d-none" id="BookCheck">
+      <!-- one -->
+      
+      <div class="row justify-content-center mb-3">
+        <div class="col-md-12">
+          <div class="card shadow-0 border rounded-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                    <img src="#" class="w-100" id="ImgSrc" />
+                    <a href="#!">
+                      <div class="hover-overlay">
+                        <div class="mask" style="background-color: rgba(253, 253, 253, 0.15)"></div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <h5>
+                    <span id="Title"></span>
+                    <span class="badge bg-primary" style="font-size: small"
+                      ><span id="Edition">0</span><sup id="EditSup">st</sup><span> Edition</span>
+                    </span>
+                  </h5>
+                  <p id="Author">0</p>
+                  <p id ="Desp"> </p>
+                  <div class="mt-1 mb-0 text-muted">
+                    <span class="text-primary"> ISBN :</span>
+                    <span id="ISBN">0</span><br />
+                    <span class="text-primary">Publications :</span>
+                    <span id="Publication">0</span><br />
+                    <span class="text-primary">Category :</span>
+                    <span id="Cate">0</span><br />
+                    <span class="text-primary">Publications Date :</span>
+                    <span id="Year">0</span><br />
+                    <span class="text-primary">Location :</span>
+                    <span id="Loc">0</span><br />
+                    <span class="text-primary"> Current Availability : </span><span class="badge rounded-pill bg-success" id="Avail"> 0</span><br />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        </div>
+
+        </div>
+<p class="h4 text-center text-white bg-primary p-1">Edit Book Information</p>
+      <div class="row mb-4 mt-3">
+        <div class="col">
+          <div class="form-outline">
+            <label class="form-label" for="bookid">Book Name</label>
+            <input type="text" id="bookid" name="BookName" class="form-control  " placeholder="Ex: Introduction to Computer" />
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-outline">
+            <label class="form-label" for="author">Book Author</label>
+            <input type="text" id="author" name="Author" class="form-control  " placeholder="Ex: Charles Smith" />
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-6">
+          <div class="form-outline">
+            <label class="form-label" for="cate">Category</label>
+            <input type="text" id="cate" name="Category" class="form-control  " list="Category" placeholder="Category"/>
+            <datalist id="Category">
+                {% for options in cate %}
+                   <option value="{{ options }}"/>
+                {% endfor %}
+                </datalist>
+          </div>
+        </div>
+        <div class="col-3 offset-3">
+          <div class="form-outline">
+            <label class="form-label" for="edition">Book Edition</label>
+            <input type="text" id="edition" name="Edition" class="form-control  " placeholder="Ex: 1 " />
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-7">
+          <div class="form-outline">
+            <label class="form-label" for="pcompany">Publication Company</label>
+            <input
+              type="text"
+              id="pcompany" name="Publication"
+              class="form-control  "
+              placeholder="Ex: MC Graw Hill"
+                
+            />
+          </div>
+        </div>
+        <div class="col-3 offset-2">
+          <div class="form-outline">
+            <label class="form-label" for="pyear">Year</label>
+            <input type="text" id="pyear" name="Year" class="form-control  " placeholder="Ex: July 30, 2001" />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="isbn">ISBN</label>
+        <input
+          type="text"
+          id="isbn" name="ISBN"
+          class="form-control  "
+          placeholder="Format: <10 digits>,<13 digits> Ex: 1691352322,9781691352326"
+            
+        />
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-6">
+          <div class="form-outline">
+            <label class="form-label" for="Location">Location in Library</label>
+            <input
+              type="text"
+              id="Location" name="Location"
+              class="form-control  "
+              placeholder="Format: KCE-SHELF<no>-<row> Ex: KCE-SHELF017-037" 
+            />
+          </div>
+        </div>
+        <div class="col-2 offset-3">
+          <div class="form-outline">
+            <label class="form-label" for="TAvail">Total Available</label>
+            <input type="text" id="TAvail" name="TotalAvail" class="form-control  " placeholder="Ex: 31 " />
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-9">
+          <div class="form-outline">
+            <label class="form-label" for="imgsrc">Image Link</label>
+            <input type="text" id="imgsrc" name="ImgSource" class="form-control  " placeholder="Format:<url> Ex: https://example.com " />
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-outline">
+            <label class="form-label" >Is Audio Books Available?</label>
+          </div>
+          <div class="form-check form-check-inline mt-3">
+                  <input class="form-check-input" type="radio" name="Audio" id="Radio1" value="No" />
+                  <label class="form-check-label" for="Radio1">No</label>
+          </div>
+          <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="Audio" id="Radio2" value="Yes" />
+                  <label class="form-check-label" for="Radio2">Yes</label>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="form-outline mb-4">
+            <label class="form-label" for="Despr">Book Description</label>
+            <textarea id="Despr" name="BookDesp" class="form-control  " placeholder="Paragraph min: 150 words " /></textarea>
+          </div>
+        </div>
+        
+      </div>
+
+     
+
+      <div class="form-check d-flex justify-content-center mb-4">
+        <input class="form-check-input me-2" name="Check it" type="checkbox" value="No" id="check1" onclick="checkstatus(this)" />
+        <label class="form-check-label" for="check1"> Check twice on given data. </label>
+      </div>
+
+      <!-- Submit button -->
+      <div class="text-center">
+        <button type="reset" class="btn btn-danger btn-block mb-4">Cancel</button>
+        <button type="submit" class="btn btn-success btn-block mb-4">Edit Book</button>
+      </div>
+    </form>
+    <script>
+      function checkstatus(self){
+              if(self.checked == true){
+                  self.value = "Yes";
+                }else{
+                  self.value = "No";
+                }
+            }
+    </script>
+     <script type="text/javascript">
+      var bookcheck = document.getElementById("BookCheck");
+      var title = document.getElementById("Title");
+      var edition = document.getElementById("Edition");
+      var editsup = document.getElementById("EditSup");
+      var author = document.getElementById("Author");
+      var imgsource = document.getElementById("ImgSrc");
+      var isbn = document.getElementById("ISBN");
+      var publication = document.getElementById("Publication");
+      var cate = document.getElementById("Cate");
+      var availability = document.getElementById("Avail");
+      var year = document.getElementById("Year");
+      var loc = document.getElementById("Loc");
+      var content = document.getElementById("Desp");
+
+      var title1 = document.getElementById("bookid");
+      var edition1 = document.getElementById("edition");
+      var author1 = document.getElementById("author");
+      var imgsource1 = document.getElementById("imgsrc");
+      var isbn1 = document.getElementById("isbn");
+      var publication1 = document.getElementById("pcompany");
+      var cate1 = document.getElementById("cate");
+      var availability1 = document.getElementById("TAvail");
+      var year1 = document.getElementById("pyear");
+      var loc1 = document.getElementById("Location");
+      var content1 = document.getElementById("Despr");
+      var rad1 = document.getElementById("Radio1");
+      var rad2 = document.getElementById("Radio2");
+
+      function getjson() {
+        fetch("../static/Books.json")
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            let Json = data;
+            sessionStorage.setItem("Data", JSON.stringify(Json));
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+      $("#Bookid").change(function(){
+    
+      // function getdata() {
+        var Book = $("#Bookid").val();
+        getjson();
+        var data = JSON.parse(sessionStorage.getItem("Data"));
+        for (item in data) {
+          if (Book == data[item]["_BookId"]) {
+            sessionStorage.setItem("Avail", data[item]["_TotalAvail"]);
+            sessionStorage.setItem("BookTitle", data[item]["_BookTitle"]);
+            bookcheck.classList.remove("d-none");
+            title.innerHTML = data[item]["_BookTitle"];
+            author.innerHTML = data[item]["_BookAuthor"];
+            imgsource.src = data[item]["_ImgSrc"];
+            content.innerHTML = data[item]["_Description"]
+            isbn.innerHTML = data[item]["_ISBN"];
+            publication.innerHTML = data[item]["_Publications"];
+            edition.innerHTML = data[item]["_Edition"];
+            availability.innerHTML = data[item]["_TotalAvail"];
+            year.innerHTML = data[item]["_Year"];
+            loc.innerHTML = data[item]["_Location"];
+            cate.innerHTML = data[item]["_Category"];
+
+            title1.value = data[item]["_BookTitle"];
+            author1.value = data[item]["_BookAuthor"];
+            imgsource1.value = data[item]["_ImgSrc"];
+            content1.innerHTML = data[item]["_Description"]
+            isbn1.value = data[item]["_ISBN"];
+            publication1.value = data[item]["_Publications"];
+            edition1.value = data[item]["_Edition"];
+            availability1.value = data[item]["_TotalAvail"];
+            year1.value = data[item]["_Year"];
+            loc1.value = data[item]["_Location"];
+            cate1.value = data[item]["_Category"];
+            if (data[item]["_Audio"] == "Yes"){
+                  rad2.checked = true;
+            }
+            else{
+              rad1.checked = true;
+            }
+
+            if (data[item]["_Edition"] == "1") {
+              editsup.innerHTML = "st";
+            } else if (data[item]["_Edition"] == "2") {
+              editsup.innerHTML = "rd";
+            } else {
+              editsup.innerHTML = "th";
+            }
+            break;
+          } else {
+            bookcheck.classList.add("d-none");
+          }
+        }
+      });
+      function clear() {
+        sessionStorage.setItem("Avail", "Null");
+        sessionStorage.setItem("BookTitle", "None");
+      }
+    </script>
+  </body>
+</html>

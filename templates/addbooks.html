@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+{% include 'head.html' %}
+    <title>Add Books</title>
+    <style>
+      input {
+        border: none;
+        outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    {% include 'headernav.html' %}
+    <hr class="navhr" />
+    <h2 class="text-center h2 text-primary mt-3">Add Books to Library</h2>
+    <form action="{{url_for('adddone')}}" method="post" style="margin: 2% 15%">
+      <div class="row mb-4">
+        <div class="col">
+          <div class="form-outline">
+            <label class="form-label" for="bookid">Book Name</label>
+            <input type="text" id="bookid" name="BookName" class="form-control " placeholder="Ex: " required/>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-outline">
+            <label class="form-label" for="author">Book Author</label>
+            <input type="text" id="author" name="Author" class="form-control " placeholder="Ex: " required/>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-6">
+          <div class="form-outline">
+            <label class="form-label" for="Cate">Category</label>
+            <input type="text" id="Cate" name="Category" class="form-control " list="Category" required/>
+            <datalist id="Category">
+                {% for options in cate %}
+                   <option value="{{ options }}"/>
+                {% endfor %}
+                </datalist>
+          </div>
+        </div>
+        <div class="col-3 offset-3">
+          <div class="form-outline">
+            <label class="form-label" for="edition">Book Edition</label>
+            <input type="text" id="edition" name="Edition" class="form-control " placeholder="Format:<number> Ex: 1 " required/>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-7">
+          <div class="form-outline">
+            <label class="form-label" for="pcompany">Publication Company</label>
+            <input
+              type="text"
+              id="pcompany" name="Publication"
+              class="form-control "
+              placeholder="Format:<name> Ex: MC Graw Hill"
+                required
+            />
+          </div>
+        </div>
+        <div class="col-3 offset-2">
+          <div class="form-outline">
+            <label class="form-label" for="pyear">Year</label>
+            <input type="text" id="pyear" name="Year" class="form-control " placeholder="Format:<Month date, year> Ex: July 30, 2001" required/>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="isbn">ISBN</label>
+        <input
+          type="text"
+          id="isbn" name="ISBN"
+          class="form-control "
+          placeholder="Format: <10 digits>,<13 digits> Ex: 1691352322,9781691352326"
+            required
+        />
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-6">
+          <div class="form-outline">
+            <label class="form-label" for="Loc">Location in Library</label>
+            <input
+              type="text"
+              id="Loc" name="Location"
+              class="form-control "
+              placeholder="Format: KCE-SHELF<no>-<row> Ex: KCE-SHELF017-037" required
+            />
+          </div>
+        </div>
+        <div class="col-3 offset-3">
+          <div class="form-outline">
+            <label class="form-label" for="TAvail">Total Available</label>
+            <input type="text" id="TAvail" name="TotalAvail" class="form-control " placeholder="Format:<number> Ex: 31 " required/>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-8">
+          <div class="form-outline">
+            <label class="form-label" for="imgsrc">Image Link</label>
+            <input type="text" id="imgsrc" name="ImgSource" class="form-control " placeholder="Format:<url> Ex: " required/>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-outline">
+            <label class="form-label" for="IDS">Book ID</label>
+            <input type="text" id="IDS" name="BookId" class="form-control " placeholder="Format:<year> Ex: " required/>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-9">
+          <div class="form-outline mb-4">
+            <label class="form-label" for="Desp">Book Description</label>
+            <textarea id="Desp" name="BookDesp" class="form-control " placeholder="Format:<paragraph min: 150 words >" required/></textarea>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-outline">
+            <label class="form-label" >Is Audio Books Available ? </label>
+          </div>
+          <div class="form-check form-check-inline mt-3">
+                  <input class="form-check-input" type="radio" class="AudioCls" name="Audio" id="Radio1" value="No" />
+                  <label class="form-check-label" for="Radio1">No</label>
+          </div>
+          <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" class="AudioCls" name="Audio" id="Radio2" value="Yes" />
+                  <label class="form-check-label" for="Radio2">Yes</label>
+          </div>
+        </div>
+      </div>
+     
+       <div class="d-none" id="AudBooks">
+        <p class="text-center text-primary h3">For Audio Books only</p>
+        <div class="row mt-5">
+
+          <div class="col-4">
+          <div class="form-outline">
+            <label class="form-label" >Single File Audio </label>
+          </div>
+          <div class="form-check form-check-inline mt-3">
+                  <input class="form-check-input" type="radio" name="SingleFile" id="Radio3" value="No" />
+                  <label class="form-check-label" for="Radio3">No</label>
+          </div>
+          <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="SingleFile" id="Radio4" value="Yes" />
+                  <label class="form-check-label" for="Radio4">Yes</label>
+          </div>
+        </div>
+
+            <div class="col-4">
+              <div class="form-outline">
+                <label class="form-label" >If Chapter name was specific (give yes). </label>
+              </div>
+              <div class="form-check form-check-inline mt-3">
+                      <input class="form-check-input" type="radio" name="ChapterName" id="Radio5" value="No" />
+                      <label class="form-check-label" for="Radio5">No</label>
+              </div>
+              <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="ChapterName" id="Radio6" value="Yes" />
+                      <label class="form-check-label" for="Radio6">Yes</label>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="form-outline">
+                <label class="form-label" for="Count">No of Chapters : </label>
+                <input type="number" id="Count" name="Counts" class="form-control " placeholder=" Ex: 1 "/>
+              </div>
+           </div>
+        </div>
+        <br>
+       
+       
+      
+        <div class="row mb-4" id="Container">
+        <div class="col-5 p-2">
+          <div class="form-outline" id="chapter">
+           
+          </div>
+        </div>
+        <div class="col-7 p-2">
+          <div class="form-outline" id="link">
+            </div>
+        </div>
+      </div>
+    <script>
+      const AudBooksUpdate = document.getElementById("AudBooks");
+      $("#Radio2").change(function(){
+      let radio_value = $("#Radio2:checked").val();
+      if (radio_value == "Yes"){
+          AudBooksUpdate.classList.remove("d-none")
+      }
+      else{
+          AudBooksUpdate.classList.add("d-none")
+      }
+      });
+      $("#Radio1").change(function(){
+      let radio_value = $("#Radio1:checked").val();
+      if (radio_value == "No"){
+          AudBooksUpdate.classList.add("d-none")
+      }
+      else{
+          AudBooksUpdate.classList.remove("d-none")
+      }
+      });
+    </script>
+        <script>
+           const chapname =document.getElementById("chapter");
+           const chaplink = document.getElementById("link");
+           const num = document.getElementById("Count");
+
+           num.addEventListener("input",function (){
+              const count = parseInt(num.value);
+              chapname.innerHTML = "";
+              chaplink.innerHTML = "";
+              for(let i=1; i<=count; i++){
+                const label = document.createElement("label");
+                label.htmlFor = `Chapter${i}`;
+                label.textContent =`Chapter ${i}`;
+                label.className = "form-label";
+
+                const inputField = document.createElement("input");
+                inputField.type = "text";
+                inputField.id = `Chapter${i}`;
+                inputField.name = `ChapName${i}`;
+                inputField.className = "form-control";
+                inputField.classList.add("mb-3");
+                
+                chapname.appendChild(label);
+                chapname.appendChild(inputField);
+                
+
+                const label1 = document.createElement("label");
+                label1.htmlFor = `Chapterlink${i}`;
+                label1.textContent =`Audio for Chapter ${i}`;
+                label1.className = "form-label";
+
+                const inputField1 = document.createElement("input");
+                inputField1.type = "text";
+                inputField1.id = `ChapterLink${i}`;
+                inputField1.name = `ChapLink${i}`;
+                inputField1.className = "form-control";
+                inputField1.classList.add("mb-3");
+
+                chaplink.appendChild(label1);
+                chaplink.appendChild(inputField1);
+              
+
+              }
+
+           });
+        </script>
+       </div>
+     
+
+      <div class="form-check d-flex justify-content-center mb-4">
+        <input class="form-check-input me-2" name="Check it" type="checkbox" value="No" id="check1" onclick="checkstatus(this)" required/>
+        <label class="form-check-label" for="check1"> Check twice on given data. </label>
+      </div>
+
+      <!-- Submit button -->
+      <div class="text-center">
+        <button type="reset" class="btn btn-danger btn-block mb-4">Cancel</button>
+        <button type="submit" class="btn btn-success btn-block mb-4">Add Book</button>
+      </div>
+    </form>
+    <script>
+      function checkstatus(self){
+              if(self.checked == true){
+                  self.value = "Yes";
+                }else{
+                  self.value = "No";
+                }
+            }
+    </script>
+  </body>
+</html>

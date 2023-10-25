@@ -1,0 +1,20 @@
+[
+        {
+                "Today": "Wed",
+                "IssueCount": "00000",
+                "ReturnCount": "00000",
+                "PrevIssueCount": "00000",
+                "PrevReturnCount": "00000",
+                "Const_Issue_Id": "0000003"
+        },
+        {
+                "Total_Books": "00157",
+                "Unique_Books": "00014",
+                "TotalIssueCount": "00003"
+        },
+        {
+                "LastAddon": "Oct 25, 2023 12:49:52",
+                "LastModify": "",
+                "LastDrop": ""
+        }
+]

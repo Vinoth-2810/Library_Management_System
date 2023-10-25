@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include 'head.html' %}
+    <title>Return Books</title>
+    <style>
+      hr {
+        width: 70%;
+        margin-left: 0;
+        margin-right: auto;
+      }
+      body {
+        background: #ffffff;
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body onload="clear()">
+    {% include 'headernav.html' %}
+    <hr />
+    <div class="alert alert-dismissible fade show d-none" role="alert" id="alerting" style="margin: 0% 15%">
+      <i class="fa-solid fa-bell fa-fade" style="color: #ffdd00; margin-right: 0.5rem; font-size: 1.5rem; font-weight: bold"></i
+      ><strong id="headAlert">Hi!</strong>
+      <span id="contentAlert">err.</span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <p class="h2 text-center text-primary">Returning Books</p>
+    <form action="{{url_for('rtrndone')}}" method="post" name="Issueform" style="margin: 2% 15%" onchange="getdata()">
+      <!-- Name input -->
+      <div class="form-outline mb-4 row">
+        <div class="col">
+          <label class="form-label" for="Bookid">Book ID </label>
+          <input type="text" id="Bookid" name="BookId" class="form-control" />
+        </div>
+        <div class="col">
+          <label class="form-label" for="roll">Roll No</label>
+          <input type="text" id="roll" name="RollNo" class="form-control" />
+        </div>
+      </div>
+
+      <div class="form-outline mb-4">
+        <button type="reset" class="btn btn-danger btn-block mb-4">Cancel</button>
+        <button type="button" class="btn btn-warning btn-block mb-4" onclick="Check()">Check</button>
+        <button type="submit" class="btn btn-primary btn-block mb-4" id="issubmit">Return</button>
+      </div>
+    </form>
+
+    <div class="container d-none" id="BookCheck">
+      <!-- one -->
+      <p class="h4 text-center text-primary">Book Information</p>
+      <div class="row justify-content-center mb-3">
+        <div class="col-md-12 col-xl-10">
+          <div class="card shadow-0 border rounded-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                  <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                    <img src="#" class="w-75" id="ImgSrc" />
+                    <a href="#!">
+                      <div class="hover-overlay">
+                        <div class="mask" style="background-color: rgba(253, 253, 253, 0.15)"></div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6">
+                  <h5>
+                    <span id="Title"></span>
+                    <span class="badge bg-primary" style="font-size: small"
+                      ><span id="Edition">0</span><sup id="EditSup">st</sup><span> Edition</span>
+                    </span>
+                  </h5>
+                  <p id="Author">0</p>
+                  <div class="mt-1 mb-0 text-muted">
+                    <span class="text-primary"> ISBN :</span>
+                    <span id="ISBN">0</span><br />
+                    <span class="text-primary">Publications :</span>
+                    <span id="Publication">0</span><br />
+                    <span class="text-primary">Category :</span>
+                    <span id="Cate">0</span><br />
+                    <span class="text-danger">Student Roll No : </span><span id="rollnumber"></span><br />
+                    <span class="text-danger">Borrow ID : </span><span id="issueID"></span><br />
+                    <span class="text-danger">Fixed Borrow ID : </span><span id="ConstissueID"></span><br />
+                    <span class="text-danger">Due Date : </span><span id="rtime"></span> <span class="text-danger ms-4">Returned Date : </span
+                    ><span id="rdtime"></span>
+                    <br />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      var bookcheck = document.getElementById("BookCheck");
+      var SRoll = document.getElementById("rollnumber");
+      var IssueID = document.getElementById("issueID");
+      var const_id = document.getElementById("ConstissueID");
+      var rtrn = document.getElementById("rtime");
+      var returned = document.getElementById("rdtime");
+      var title = document.getElementById("Title");
+      var edition = document.getElementById("Edition");
+      var editsup = document.getElementById("EditSup");
+      var author = document.getElementById("Author");
+      var imgsource = document.getElementById("ImgSrc");
+      var isbn = document.getElementById("ISBN");
+      var publication = document.getElementById("Publication");
+      var cate = document.getElementById("Cate");
+      var alert = document.getElementById("alerting");
+      var stgcontent = document.getElementById("headAlert");
+      var content = document.getElementById("contentAlert");
+      function getjson() {
+        fetch("../static/Books.json")
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            let Json = data;
+            sessionStorage.setItem("Data", JSON.stringify(Json));
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        fetch("../static/Issued_Return_Data.json")
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            let Json = data;
+            sessionStorage.setItem("RtnData", JSON.stringify(Json));
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+      function getdata() {
+        var book = $("#Bookid").val();
+        var roll = $("#roll").val();
+        getjson();
+        var data = JSON.parse(sessionStorage.getItem("Data"));
+        var rtndata = JSON.parse(sessionStorage.getItem("RtnData"));
+        for (item in data) {
+          if (book == data[item]["_BookId"]) {
+            sessionStorage.setItem("BookTitle", data[item]["_BookTitle"]);
+            // bookcheck.classList.remove("d-none");
+            title.innerHTML = data[item]["_BookTitle"];
+            author.innerHTML = data[item]["_BookAuthor"];
+            imgsource.src = data[item]["_ImgSrc"];
+            isbn.innerHTML = data[item]["_ISBN"];
+            publication.innerHTML = data[item]["_Publications"];
+            edition.innerHTML = data[item]["_Edition"];
+
+            cate.innerHTML = data[item]["_Category"];
+            if (data[item]["_Edition"] == "1") {
+              editsup.innerHTML = "st";
+            } else if (data[item]["_Edition"] == "2") {
+              editsup.innerHTML = "rd";
+            } else {
+              editsup.innerHTML = "th";
+            }
+            break;
+          }
+        }
+        for (list in rtndata) {
+          if (book == rtndata[list]["BookId"] && roll == rtndata[list]["RollNo"]) {
+            bookcheck.classList.remove("d-none");
+            const_id.innerHTML = rtndata[list]["Const_Issue_Id"];
+            IssueID.innerHTML = rtndata[list]["Issue_id"];
+            SRoll.innerHTML = rtndata[list]["RollNo"];
+            rtrn.innerHTML = rtndata[list]["ReturningTime"];
+            returned.innerHTML = rtndata[list]["ReturnedTime"];
+            sessionStorage.setItem("Return", rtndata[list]["ReturnedTime"]);
+          } else {
+            bookcheck.classList.add("d-none");
+          }
+        }
+      }
+      function Check() {
+        alert.classList.remove("d-none");
+        alert.classList.add("alert-warning");
+        alert.classList.add("alert-success");
+        var status = sessionStorage.getItem("Return");
+        var name = sessionStorage.getItem("BookTitle");
+        if (status == "Not Yet") {
+          alert.classList.remove("alert-warning");
+          content.innerHTML = ` <i> ${name} </i> Book is not returned yet. `;
+          stgcontent.innerHTML = "Status => Ready to Return  :";
+        } else if (status == "Null") {
+          alert.classList.remove("alert-success");
+          content.innerHTML = ` First give input to check. `;
+          stgcontent.innerHTML = " Status => DATA ERROR  : ";
+        } else {
+          alert.classList.remove("alert-success");
+          content.innerHTML = `<i> ${name} </i> Book is already returned. `;
+          stgcontent.innerHTML = " Status => PROCESS ERROR  : ";
+        }
+      }
+      function clear() {
+        sessionStorage.setItem("Return", "Null");
+        sessionStorage.setItem("BookTitle", "None");
+      }
+    </script>
+  </body>
+</html>

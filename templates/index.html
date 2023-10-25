@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='image/logo.png') }}">
+    <script src="https://kit.fontawesome.com/2ae4acf544.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <title>Library</title>
+    <style>
+        body{
+            background-image: url("/static/image/Library_Book1.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            overflow-y: hidden;
+        }
+    </style>
+    <script>
+        localStorage["Auth"] = "Fail";
+        localStorage["Role"] = "Not";
+    </script>
+    
+</head>
+<body>
+    {% include 'headernav.html' %}
+    <div class="rows pt-5" style="margin-top:12%;">
+    <div class="col-5 card ms-5" style="background-color: rgba(255, 255, 255, 0);border:none;">
+        <div class="card-body">
+          <h5 class="card-title" style="color:#ffffff;font-size: 1.5em;"><span style="font-size: 1.75em;">KCE  L</span><span style="font-size: 1.5em;">ibrary</span></h5>
+          <p class="card-text" style="color:#ffffff;font-size: 1.25em;">Begin with a warm and inviting you to KCE Library: Your Gateway to Knowledge and Imagination.</p>
+          <a href="{{url_for('dashbrd')}}" class="btn btn-primary">Let's Begin  &nbsp; <span><i class="fa-solid fa-arrow-right fa-beat-fade" style="color: #ffffff;"></i></span></a>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

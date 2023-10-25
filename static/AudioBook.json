@@ -1,0 +1,61 @@
+[
+  {
+    "BookId": "AS03E17P",
+    "BookTitle": "The Adventures of Sherlock Holmes",
+    "BookDescription": "Embark on thrilling investigations with The Complete Novel of Sherlock Holmes. This comprehensive collection features all four novels, showcasing the brilliant deductions and captivating adventures of the iconic detective Sherlock Holmes and his loyal companion, Dr. John Watson.",
+    "BookAuthor": "Arthur Conan Doyle",
+    "ImgSrc": "https://m.media-amazon.com/images/I/61QVfl1zSHL._SL1360_.jpg",
+    "Category": "Fiction",
+    "ChapterWise": "Yes",
+    "SingleFile": "No",
+    "ChapterName": "Yes",
+    "AudioFile": {
+      "A Scandal in Bohemia": "1qDB3ZlndW2qYl66VTyZ6O7k5S8ok_OUl",
+      "The Red-headed League": "1A9kDCXQl0KGArJv18W-c4s0ayzX3bzS2",
+      "A Case of Identity": "1YyGG2t1KJ3YT8mc7SDW17Yq1VL9wzXux",
+      "The Boscombe Valley Mystery": "1zyoW7wAIzKFzBjYZg3g_Qm13uImMlFjx",
+      "The Five Orange Pips": "1JU5rl2rRH2n6IiH6287xWyKadmLKk9bD",
+      "The Man with the Twisted Lip": "1RuGbbcz6FK6RPN3iU4bZ1ABY3G_D-reM",
+      "The Adventure of the Blue Carbuncle": "1YF0FfQk7uUD1ZJANZbkKBmal35lQSf53",
+      "The Adventure of the Speckled Band": "14AVt0LbK68O-a-XPCdemerqr1jU5AZlZ",
+      "The Adventure of the Engineer's Thumb": "1NpLOnEDT3WMhSOJe5WZl-waytk1VfeWq",
+      "The Adventure of the Noble Bachelor": "1RfwwK4bCjzJ7X5AvZeEnk1uLv71PeNVx",
+      "The Adventure of the Beryl Coronet": "1FK7tOFs2B4MpqpxGVhTTnBUWb5G8ZoLe",
+      "The Adventure of the Copper Beeches": "16Oz0MhD5Gy3a8GAdLM44K7N_pHxHOMGY"
+    }
+  },
+  {
+    "BookId": "OB05E13P",
+    "BookTitle": "The Open Boat",
+    "BookAuthor": "Stephen Crane",
+    "Category": "Fiction",
+    "BookDescription": "The Open Boat is based on an actual incident from Stephen Crane\u2019s life. While on his way to Cuba, Crane's ship sank off the coast of Florida. Crane and other survivors were stranded at sea for thirty hours. They eventually made their way to safety in a small boat, but one of the men drowned while trying to swim to shore. Crane wrote this story soon after the incident occurred.",
+    "ImgSrc": "https://m.media-amazon.com/images/I/51sCbz2OpvL.jpg",
+    "ChapterWise": "Yes",
+    "SingleFile": "No",
+    "ChapterName": "No",
+    "AudioFile": {
+      "Chapter 1": "1J87MrAF09Pg9BXmDz0Hr9yalhMzTk8dl",
+      "Chapter 2": "12asH1rFRlRwoGq1_Uob73LbGDwiiRnLk",
+      "Chapter 3": "18VjQeFMs5USM4lrvPVLfkyax2yJZroqF",
+      "Chapter 4": "1EDaaFg2Mo91fMUIQGo_DgpfVXSi-LQdg",
+      "Chapter 5": "1ieYU4IEiOb0f2-s5xuGKIdfH358i4rpK",
+      "Chapter 6": "1FmnyOGhN8iAhQwmMMjzenwdNaw51ACh_",
+      "Chapter 7": "1pExC1kvd1AE69V4-wmw3UV5h4PVI0BUf"
+    }
+  },
+  {
+    "BookId": "BY01E14P",
+    "BookTitle": "Believe in Yourself",
+    "BookAuthor": " Dr Joseph Murphy",
+    "Category": "Fiction",
+    "BookDescription": "In Believe in Yourself, Dr. Murphy stresses about having faith in ones abilities, believing in the inner self and in having the courage to chase your dream, come what may. The book was first published in 1955 but remains as popular as it was then. Being a preacher, with decades of experience behind him, Dr Murphy delves into lives of people to demonstrate the all encompassing power of self. By citing interesting episodes from the lives of artists, writers, entrepreneurs and ordinary people, who achieved acclaim and success, the author goes on to emphasize that one thread that runs through was a strong belief in oneself.",
+    "ImgSrc": "https://m.media-amazon.com/images/I/61RlLYVbDSL._SY466_.jpg",
+    "ChapterWise": "No",
+    "SingleFile": "Yes",
+    "ChapterName": "No",
+    "AudioFile": {
+      "Believe in Yourself": "1f1p-7hfxI42i7THks4SlAKjLGLURPm-E"
+    }
+  }
+]

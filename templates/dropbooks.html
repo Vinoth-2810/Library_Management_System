@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include 'head.html' %}
+    <title>Drop Books</title>
+    <style>
+      hr {
+        width: 70%;
+        margin-left: 0;
+        margin-right: auto;
+      }
+      body {
+        background: #ffffff;
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body onload="clear()">
+    {% include 'headernav.html' %}
+    <hr />
+
+    <p class="h2 text-center text-primary">Removing Books</p>
+    <form action="{{url_for('removedone')}}" method="post" name="Issueform" style="margin: 2% 15%" onchange="getdata()">
+      <!-- Name input -->
+      <div class="form-outline mb-4 row">
+        <div class="col-6">
+          <label class="form-label" for="Bookid">Book ID </label>
+          <input type="text" id="Bookid" name="BookId" class="form-control" />
+        </div>
+        <div class="col-5 d-flex align-items-end offset-1">
+          <input class="form-check-input me-2 fs-4" name="Check" type="checkbox" value="No" id="check1" onclick="checkstatus(this)" required />
+          <label class="form-check-label" for="check1"> Confirm books that you remove and your action </label>
+        </div>
+      </div>
+
+      <div class="form-outline mb-4">
+        <button type="reset" class="btn btn-danger btn-block mb-4">Cancel</button>
+        <button type="submit" class="btn btn-primary btn-block mb-4" id="issubmit">Remove</button>
+      </div>
+    </form>
+
+    <div class="container d-none" id="BookCheck">
+      <!-- one -->
+      <p class="h4 text-center text-primary">Book Information</p>
+      <div class="row justify-content-center mb-3">
+        <div class="col-md-12 col-xl-10">
+          <div class="card shadow-0 border rounded-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                  <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                    <img src="#" class="w-75" id="ImgSrc" />
+                    <a href="#!">
+                      <div class="hover-overlay">
+                        <div class="mask" style="background-color: rgba(253, 253, 253, 0.15)"></div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6">
+                  <h5>
+                    <span id="Title"></span>
+                    <span class="badge bg-primary" style="font-size: small"
+                      ><span id="Edition">0</span><sup id="EditSup">st</sup><span> Edition</span>
+                    </span>
+                  </h5>
+                  <p id="Author">0</p>
+                  <div class="mt-1 mb-0 text-muted">
+                    <span class="text-primary"> ISBN :</span>
+                    <span id="ISBN">0</span><br />
+                    <span class="text-primary">Publications :</span>
+                    <span id="Publication">0</span><br />
+                    <span class="text-primary">Category :</span>
+                    <span id="Cate">0</span><br />
+                    <span class="text-primary"> Current Availability : </span><span class="badge rounded-pill bg-success" id="Avail"> 0</span><br />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      var bookcheck = document.getElementById("BookCheck");
+      var title = document.getElementById("Title");
+      var edition = document.getElementById("Edition");
+      var editsup = document.getElementById("EditSup");
+      var author = document.getElementById("Author");
+      var imgsource = document.getElementById("ImgSrc");
+      var isbn = document.getElementById("ISBN");
+      var publication = document.getElementById("Publication");
+      var cate = document.getElementById("Cate");
+      var availability = document.getElementById("Avail");
+
+      function getjson() {
+        fetch("../static/Books.json")
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            let Json = data;
+            sessionStorage.setItem("Data", JSON.stringify(Json));
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+      function getdata() {
+        var model = $("#Bookid").val();
+        getjson();
+        var data = JSON.parse(sessionStorage.getItem("Data"));
+        for (item in data) {
+          if (model == data[item]["_BookId"]) {
+            sessionStorage.setItem("Avail", data[item]["_TotalAvail"]);
+            sessionStorage.setItem("BookTitle", data[item]["_BookTitle"]);
+            bookcheck.classList.remove("d-none");
+            title.innerHTML = data[item]["_BookTitle"];
+            author.innerHTML = data[item]["_BookAuthor"];
+            imgsource.src = data[item]["_ImgSrc"];
+            isbn.innerHTML = data[item]["_ISBN"];
+            publication.innerHTML = data[item]["_Publications"];
+            edition.innerHTML = data[item]["_Edition"];
+            availability.innerHTML = data[item]["_TotalAvail"];
+            cate.innerHTML = data[item]["_Category"];
+            if (data[item]["_Edition"] == "1") {
+              editsup.innerHTML = "st";
+            } else if (data[item]["_Edition"] == "2") {
+              editsup.innerHTML = "rd";
+            } else {
+              editsup.innerHTML = "th";
+            }
+            break;
+          } else {
+            bookcheck.classList.add("d-none");
+          }
+        }
+      }
+
+      function clear() {
+        sessionStorage.setItem("Avail", "Null");
+        sessionStorage.setItem("BookTitle", "None");
+      }
+      function checkstatus(self) {
+        if (self.checked == true) {
+          self.value = "Yes";
+        } else {
+          self.value = "No";
+        }
+      }
+    </script>
+  </body>
+</html>

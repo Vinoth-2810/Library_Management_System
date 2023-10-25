@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include 'head.html' %}
+    <title>Books</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}" />
+    <style>
+      hr {
+        width: 70%;
+        margin-left: 0;
+        margin-right: auto;
+      }
+      body {
+        background-color: #eee !important;
+        overflow-x: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    {% include 'headernav.html' %}
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #eee !important">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Total Books : <span class="btn bg-primary text-white p-1 disabled">{{Count[0]}}</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Total Unique Books : <span class="btn bg-primary text-white p-1 disabled">{{Count[1]}}</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Total Books Borrowed : <span class="btn bg-success text-white p-1 disabled">{{Count[2]}}</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Today Books Borrowed : <span class="btn bg-danger text-white p-1 disabled">{{Count[3]}}</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Yesterday Books Borrowed : <span class="btn bg-danger text-white p-1 disabled">{{Count[4]}}</span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- <div class="justify-content-between" style="background-color: #eee !important">
+      <div class="btn-group dropend p-3 ms-5" style="background-color: #eee !important">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Category</button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{{ url_for('catebook' ,id='All') }}">All</a></li>
+          {% for option in cate %}
+
+          <li><a class="dropdown-item" href="{{ url_for('catebook' ,id=option) }}">{{option}}</a></li>
+          {% endfor %}
+        </ul>
+        <span class="btn btn-secondary">{{Cate}}</span>
+      </div>
+    </div> -->
+    <section style="background-color: #eee; margin-top: 1rem">
+      <div class="row align-items-center">
+        <div class="col-md-2 btn btn-group dropend ms-5" style="background-color: #eee !important">
+          <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-magnifying-glass" style="color: #ffffff"></i> Category Search
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ url_for('catebook' ,id='All') }}">All</a></li>
+            {% for option in cate %}
+
+            <li><a class="dropdown-item" href="{{ url_for('catebook' ,id=option) }}">{{option}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="col-md-1 text-center"><i class="fa-solid fa-repeat text-primary fs-4"></i></div>
+        <div class="col-md-8">
+          <div class="search">
+            <form action="{{url_for('opensearch')}}" method="post">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="search-1">
+                    <input class="form-control" list="searchby" name="SearchBy" id="searchon" placeholder="Search By" />
+                    <datalist id="searchby">
+                      <option value="Title"></option>
+                      <option value="Author"></option>
+                      <option value="Publications"></option>
+                      <option value="ISBN"></option>
+                      <option value="Edition"></option>
+                    </datalist>
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <div>
+                    <div class="search-2">
+                      <input class="form-control" type="text" name="SearchText" placeholder="Search" />
+                      <button class="btn btn-primary text-center" type="submit">
+                        <i class="fa-solid fa-magnifying-glass fa-fade" style="color: #ffffff; font-size: 20px"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <p class="h2 text-primary text-center mt-2">Books</p>
+      {% include 'booklist.html' %}
+    </section>
+  </body>
+</html>

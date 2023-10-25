@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include "head.html" %}
+    <title>{{book["BookTitle"]}}</title>
+  </head>
+  <body>
+    {% include "headernav.html" %}
+    <div class="container py-2 mt-3">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="bg-image hover-zoom ripple rounded ripple-surface">
+            <img src='{{book["ImgSrc"]}}' class="w-75" />
+            <a href="#!">
+              <div class="hover-overlay">
+                <div class="mask" style="background-color: rgba(253, 253, 253, 0.15)"></div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <h2 class="text-primary">{{book["BookTitle"]}}</h2>
+          <p class="h4 text-secondary">{{book["BookAuthor"]}}</p>
+          <br />
+          <p class="mb-4 mb-md-0"><span class="h5 text-info fw-bold">Description : </span><br /><br /></p>
+          <p style="text-indent: 5%">
+            <span>{{book["BookDescription"]}}</span>
+          </p>
+          {% if book["ChapterWise"] == "Yes" and book["ChapterName"] =="Yes" %}
+          <div>
+            <p class="mb-4 mb-md-0"><span class="h5 text-info fw-bold">Chapters : </span><br /></p>
+            <div class="ms-5">
+              <ol>
+                {% for Chapters in book["AudioFile"] %}
+                <li class="list-item">{{Chapters}}</li>
+                {% endfor %}
+              </ol>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <hr style="width: 70%; margin: 0% 15%" />
+    <p class="text-primary h3 text-center m-1 p-3">Listen Books</p>
+    {% for id in book["AudioFile"] %}
+    <div class="text-center p-2" style="margin: 0% 10%">
+      <p class="h5 text-success p-2">{{id}}</p>
+      <audio controls style="width: 80%; margin: 0% 10%">
+        <source src="https://docs.google.com/uc?export=download&id={{book['AudioFile'][id]}}" />
+      </audio>
+    </div>
+    {% endfor %}
+  </body>
+</html>
