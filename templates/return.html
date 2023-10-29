@@ -143,7 +143,7 @@
         for (item in data) {
           if (book == data[item]["_BookId"]) {
             sessionStorage.setItem("BookTitle", data[item]["_BookTitle"]);
-            // bookcheck.classList.remove("d-none");
+            bookcheck.classList.remove("d-none");
             title.innerHTML = data[item]["_BookTitle"];
             author.innerHTML = data[item]["_BookAuthor"];
             imgsource.src = data[item]["_ImgSrc"];
@@ -160,8 +160,8 @@
               editsup.innerHTML = "th";
             }
             break;
-          }
-        }
+          }}
+       
         for (list in rtndata) {
           if (book == rtndata[list]["BookId"] && roll == rtndata[list]["RollNo"]) {
             bookcheck.classList.remove("d-none");
