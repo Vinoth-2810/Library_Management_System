@@ -71,23 +71,25 @@
               />
             </div>
             <div>
-              <p class="dropdown-item h2 text-center text-primary"><b>Vinoth C</b></p>
-              <p class="h6 text-center text-secondary"><i>Student</i></p>
-              <div style="background-color: #ffffff">
+              <p class="dropdown-item h6 text-center text-primary"><b id="email">Vinoth C</b></p>
+              <p class="h6 text-center text-secondary"><i id="role">Student</i></p>
+              <div style="background-color: #ffffff" id="down" class="d-none d-block">
                 <li class="dropdown-item text-dark">
-                  <span class="badge bg-light text-primary">Roll No </span> - <span class="badge bg-info text-dark">71102589634p</span>
+                  <span class="badge bg-light text-primary">Roll No </span> - <span class="badge bg-info text-dark" id="roll">71102589634p</span>
                 </li>
                 <li class="dropdown-item">
-                  <span class="badge bg-light text-primary">Total Books Issued </span> - <span class="badge bg-warning text-dark">10</span>
+                  <span class="badge bg-light text-primary">Total Books Issued </span> -
+                  <span class="badge bg-warning text-dark" id="borrow">10</span>
                 </li>
                 <li class="dropdown-item">
-                  <span class="badge bg-light text-primary">Total Books Returned </span> - <span class="badge bg-success">10</span>
+                  <span class="badge bg-light text-primary">Total Books Returned </span> - <span class="badge bg-success" id="return">10</span>
                 </li>
                 <li class="dropdown-item">
-                  <span class="badge bg-light text-primary">Total Books Not Returned </span> - <span class="badge bg-danger text-light">10</span>
+                  <span class="badge bg-light text-primary">Total Books Not Returned </span> -
+                  <span class="badge bg-danger text-light" id="noreturn">10</span>
                 </li>
                 <li class="dropdown-item">
-                  <span class="badge bg-light text-primary">Total Fines </span> - <span class="badge bg-danger text-light">2.00</span>
+                  <span class="badge bg-light text-primary">Total Fines </span> - <span class="badge bg-danger text-light" id="fine">2.00</span>
                 </li>
               </div>
             </div>
@@ -101,13 +103,17 @@
     </div>
 
     <script>
+      document.getElementById("role").innerHTML = sessionStorage.getItem("role");
+      document.getElementById("email").innerHTML = sessionStorage.getItem("email");
       const auth1 = document.getElementById("aut1");
       const auth2 = document.getElementById("aut2");
       const auth3 = document.getElementById("aut3");
       const auth4 = document.getElementById("aut4");
       const auth5 = document.getElementById("aut5");
       const log1 = document.getElementById("log");
+      const prof = document.getElementById("down");
       const tr_link = document.getElementById("topright_links");
+
       if (localStorage.getItem("Auth") == "Success" && localStorage.getItem("Role") == "admin") {
         auth1.style.display = "block";
         auth2.style.display = "block";
@@ -148,6 +154,17 @@
         auth5.style.display = "none";
         tr_link.classList.add("d-none");
         log1.classList.remove("disabled");
+      }
+      if (sessionStorage.getItem("role") == "Student") {
+        prof.classList.remove("d-none");
+
+        document.getElementById("roll").innerHTML = sessionStorage.getItem("roll");
+        document.getElementById("borrow").innerHTML = sessionStorage.getItem("borrow");
+        document.getElementById("return").innerHTML = sessionStorage.getItem("return");
+        document.getElementById("noreturn").innerHTML = sessionStorage.getItem("noreturn");
+        document.getElementById("fine").innerHTML = sessionStorage.getItem("fines");
+      } else {
+        prof.classList.remove("d-block");
       }
     </script>
   </div>
