@@ -2,6 +2,7 @@ from flask import *
 import dbms
 import booksmanage
 import globalVariable
+import student
 import login_rule
 import search
 
@@ -31,10 +32,15 @@ def login():
     dic['password'] = datum["password"]
     dic['Role'] = datum["Role"]
     ret = login_rule.auth_Login(dic)
+    if datum["Role"] == "student":
+        prof = student.get_profile(datum["password"].lower())
+    else:
+        prof = (datum["username"].upper(),
+                datum["Role"].capitalize(), 0, 0, 0, 0)
     if ret[0] == "Fail":
         return render_template('autherror.html')
     else:
-        return render_template('success.html', content=["books", " Let's Get in ", "You authenticated successfully and you can continue it.", ret[0]], role=ret[1])
+        return render_template('success.html', content=["books", " Let's Get in ", "You authenticated successfully and you can continue it.", ret[0]], role=ret[1], log=1, profile=prof)
 
 
 @web.route("/books")
@@ -119,7 +125,7 @@ def adddone():
         res = "Book information was updated successfully"
     else:
         res = "Book information was not updated successfully"
-    return render_template('success.html', content=["modify", "Go to modify page", res, result], role="admin")
+    return render_template('success.html', content=["modify", "Go to modify page", res, result], role="admin", log=0)
 
 
 @web.route("/modifybooks/remove/success", methods=['POST'])
@@ -131,7 +137,7 @@ def removedone():
     else:
         res = "Book was not removed successfully"
 
-    return render_template('success.html', content=["modify", "Go to modify page", res, result], role="admin")
+    return render_template('success.html', content=["modify", "Go to modify page", res, result], role="admin", log=0)
 
 
 @web.route("/modifybooks/edit/success", methods=['POST'])
@@ -144,7 +150,7 @@ def editdone():
     else:
         res = "Book information was not updated successfully"
 
-    return render_template('success.html', content=["modify", "Go to modify page", res, result], role="admin")
+    return render_template('success.html', content=["modify", "Go to modify page", res, result], role="admin", log=0)
 
 
 @web.route("/audiobooks")
