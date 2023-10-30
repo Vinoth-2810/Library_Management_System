@@ -17,7 +17,18 @@
     <script>
       localStorage["Auth"] = "{{content[3]}}";
       localStorage["Role"] = "{{role}}";
-      // console.log(localStorage.getItem("Auth"),localStorage.getItem("Role"));
+      sessionStorage.setItem("log", "{{log}}");
+      string = localStorage.getItem("Role");
+      var role = string.charAt(0).toUpperCase() + string.slice(1);
+      if (sessionStorage.getItem("log") == 1) {
+        sessionStorage.setItem("email", "{{profile[0]}}");
+        sessionStorage.setItem("roll", "{{profile[1]}}");
+        sessionStorage.setItem("borrow", "{{profile[2]}}");
+        sessionStorage.setItem("return", "{{profile[3]}}");
+        sessionStorage.setItem("noreturn", "{{profile[4]}}");
+        sessionStorage.setItem("fines", "{{profile[5]}}");
+        sessionStorage.setItem("role", role);
+      }
     </script>
   </head>
   <body>
