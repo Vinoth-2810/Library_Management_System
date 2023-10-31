@@ -81,8 +81,10 @@ def issue():
 @web.route("/issuebooks/done", methods=['POST'])
 def issuedone():
     data = request.form
-    booksmanage.Update_data(data)
+    ConstId = booksmanage.Update_data(data)
     dbms.issued_book(str(data["BookId"]))
+    student.updateborrow(str(data["RollNo"]).lower(), str(
+        data["BookId"]).upper(), ConstId)
     return redirect(url_for('issue'))
 
 
@@ -90,7 +92,8 @@ def issuedone():
 def rtrndone():
     data = request.form
     dbms.return_book(str(data["BookId"]))
-    booksmanage.rtrnUpdate(data)
+    fines = booksmanage.rtrnUpdate(data)
+    student.updatertrn(str(data["RollNo"]).lower(), fines)
     return redirect(url_for('rtrn'))
 
 
