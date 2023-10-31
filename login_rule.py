@@ -36,3 +36,9 @@ def auth_Login(data):
                 return ["Fail", data["Role"]]
         else:
             return ["Fail", data["Role"]]
+
+
+def add_auth(email):
+    data = get_Studentjson()
+    data[0]["Email"].append(email)
+    Write_Studentjson(data)
