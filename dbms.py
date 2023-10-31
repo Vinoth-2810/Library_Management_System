@@ -74,7 +74,7 @@ def issued_book(bookid):
     data2 = globalVariable.get_generaljson()
     print(data2)
     data2[1]["TotalIssueCount"] = str(
-        int(data2[1]["TotalIssueCount"]) + 1).zfill(4)
+        int(data2[1]["TotalIssueCount"]) + 1).zfill(5)
     globalVariable.write_generaljson(data2)
 
 
