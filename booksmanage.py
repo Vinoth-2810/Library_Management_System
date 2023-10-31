@@ -21,12 +21,14 @@ def Update_data(data):
     base = get_IssueRtnjson()
     base.append(dic)
     Write_IssueRtnjson(base)
+    return dic["Const_Issue_Id"]
 
 
 def rtrnUpdate(data):
     base = get_IssueRtnjson()
     Update_base = globalVariable.get_rtrnUpdate(data, base)
-    Write_IssueRtnjson(Update_base)
+    Write_IssueRtnjson(Update_base[0])
+    return Update_base[1]
 
 
 def get_total():
