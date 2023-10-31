@@ -164,6 +164,7 @@ def get_rtrnUpdate(data, base):
     constid = get_ConstIdjson()
     BookID = str(data["BookId"])
     Roll = str(data["RollNo"])
+    fine = 0.0
     for i in base:
         if i["Return_id"] == "Not Yet" and i["BookId"] == BookID and i["RollNo"] == Roll:
             i["ReturnedTime"] = get_datetime()
@@ -172,10 +173,11 @@ def get_rtrnUpdate(data, base):
             constid[0]["Not_Yet"].remove(i["Const_Issue_Id"])
             constid[0]["Returned"].append(i["Const_Issue_Id"])
             Write_ConstIdjson(constid)
+            fine = float(i["Fines_Charges"])
             break
         else:
             pass
-    return base
+    return base, fine
 
 
 def Update_total():
