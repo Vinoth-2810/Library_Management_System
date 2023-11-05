@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include 'head.html' %}
+    <title>Today News</title>
+  </head>
+  <body>
+    {% include 'headernav.html' %}
+    <br />
+    <div class="container">
+      <p class="h3 text-primary text-center">Daily News</p>
+      <p class="text-muted text-center">All News are true and announced by <span class="text-danger">Times of India</span></p>
+      <hr class="border-bottom border-3 border-primary" />
+      {% for title in TOI %}
+      <div class="container">
+        <p class="h4 text-white bg-success p-1" style="width: 15%">
+          <span class="ms-2"><i class="fa-brands fa-battle-net text-white"> </i> {{title}}</span>
+        </p>
+
+        {% for value in TOI[title] %}
+        <br />
+        <div class="card ms-5">
+          <div class="card-body row">
+            <div class="col-4">
+              <img src="{{TOI[title][value]['Imgsrc']}}" class="img" />
+            </div>
+            <div class="col-8">
+              <div class="card-title h5">
+                <span class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-danger"> {{loop.index}} </span>{{value}}
+              </div>
+
+              <p class="card-text">{{TOI[title][value]["Content"]}}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        <br />
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
