@@ -176,6 +176,10 @@ def audiobook(id):
     data = dbms.get_aud(id)
     return render_template('audiopage.html', book=data)
 
-
+@web.route("/newstoday")
+def newsday():
+    data = news.get_news()
+    return render_template('news.html', TOI=data)
+  
 if __name__ == "__main__":
     web.run(host='0.0.0.0', debug=True)
