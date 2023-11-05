@@ -1,5 +1,5 @@
 Flask
 gunicorn
-beatuifulsoap4
+beautifulsoup4
 requests
 htmllib
