@@ -5,6 +5,7 @@ import globalVariable
 import student
 import login_rule
 import search
+import news
 
 web = Flask(__name__)
 web.secret_key = "LMSServices"
