@@ -18,13 +18,13 @@ def get_news():
     titleList = []
     src = []
     for head,cont,title,imgsrc in zip(header,paragraph,titles,img):
-        heading.append(head.contents[0].contents[0])
-        text.append(cont.contents[0].contents[0])
+        heading.append(head.text)
+        text.append(cont.text)
         src.append(imgsrc['data-src'])
-        if type(title.contents[0]) == Tag:
-            titleList.append(title.contents[0].contents[0])
+        if title.text == "":
+            titleList.append("Others")
         else:
-            titleList.append(title.contents[0])
+            titleList.append(title.text)
 
     uniq = set(titleList)
     newsContent = {}
