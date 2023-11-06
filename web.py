@@ -179,7 +179,7 @@ def audiobook(id):
 @web.route("/newstoday")
 def newsday():
     data = news.get_news()
-    return render_template('news.html', TOI=data)
+    return render_template('toi_news.html', TOI=data)
   
 if __name__ == "__main__":
     web.run(host='0.0.0.0', debug=True)
