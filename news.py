@@ -26,7 +26,7 @@ def get_news():
         else:
             titleList.append(title.text)
 
-    // uniq = set(titleList)
+   
     uniq = ["India", "World", "Sports", "Business", "Others"]
     newsContent = {}
     for uniqtitle in uniq:
